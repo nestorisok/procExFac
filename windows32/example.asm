@@ -18,23 +18,26 @@ _MainProc PROC
 mov EAX, n
 mov EBX, r
 
+
 MyPerm PROC
 push EBP		; begin stack
 mov EBP, ESP	; getting stack itself
 push EBX		; pushes r [EBP + 8]
 push EAX		; pushes n [EBP + 12]
 
-inFac:
+myFac:
 cmp EAX, 1
+jle LEND	; goes to end if smaller than 1
+dec EAX		; n - 1
+push EAX	; pushes new value of n - 1
+loop myFac
+pop EBX
+imul EAX, EBX
+
+
+sub EBX, EAX	; EAX now contains n - r
+cmp EBX, 0		; if EAX is 0, we leave the stack
 jle LEND
-dec EAX
-imul EAX, DWORD PTR[EBP + 8]
-loop inFac
-
-
-sub EAX, EBX	; EAX now contains n - r
-cmp EAX, 0		; if EAX is 0, we leave the stack
-jz LEND
 
 
 
@@ -46,12 +49,18 @@ mov EBP, ESP
 pop EBP
 ret
 
-MyPerm PROC
+
+
+
+
+
+
+
+MyPerm ENDP
 
 
 _MainProc ENDP
-
-END                             ; end of source code
+END
 
 
 
