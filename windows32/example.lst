@@ -1,8 +1,9 @@
-Microsoft (R) Macro Assembler Version 14.39.33522.0	    04/18/24 15:56:58
+Microsoft (R) Macro Assembler Version 14.39.33522.0	    04/18/24 17:18:30
 example.asm						     Page 1 - 1
 
 
-				; Example assembly language program -- adds two numbers
+				﻿; Example assembly language program -- adds two numbers
+example.asm(1) : error A2044:invalid character in file
 				; Author:  R. Detmer
 				; Date:    1/2008
 
@@ -32,29 +33,32 @@ example.asm						     Page 1 - 1
  0000000B  55			push EBP
  0000000C  8B EC		mov EBP, ESP
  0000000E  53			push EBX
- 0000000F  8B 45 04		mov EAX, DWORD PTR[EBP + 4]
+ 0000000F  8B C3		mov EAX, EBX
 
- 00000012			FAC:
- 00000012  83 FB 01		cmp EBX, 1
- 00000015  7E 09		jle LEND
- 00000017  4B			dec EBX
- 00000018  0F AF C3		imul EAX, EBX
- 0000001B  83 FB 00		cmp EBX, 0
- 0000001E  75 F2		jnz FAC
+ 00000011			FAC:
+ 00000011  83 FB 01		cmp EBX, 1
+ 00000014  7E 09		jle LEND
+ 00000016  4B			dec EBX
+ 00000017  0F AF C3		imul EAX, EBX
+ 0000001A  83 FB 00		cmp EBX, 0
+ 0000001D  75 F2		jnz FAC
 
- 00000020			LEND:
- 00000020  5B			pop EBX
- 00000021  8B EC		mov EBP, ESP
- 00000023  5D			pop EBP
- 00000024  C3			ret
- 00000025			myFac ENDP
+ 0000001F			LEND:
+ 0000001F  5B			pop EBX
+ 00000020  8B EC		mov EBP, ESP
+ 00000022  5D			pop EBP
+ 00000023  C3			ret
+
+ 00000024			myFac ENDP
 
 
- 00000025			_MainProc ENDP
+ 00000024			_MainProc ENDP
 
 				END                             ; end of source code
 
-Microsoft (R) Macro Assembler Version 14.39.33522.0	    04/18/24 15:56:58
+
+
+Microsoft (R) Macro Assembler Version 14.39.33522.0	    04/18/24 17:18:30
 example.asm						     Symbols 2 - 1
 
 
@@ -79,17 +83,17 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 0000000C Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000025 Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000024 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000025 Public
-myFac  . . . . . . . . . . . . .	P Near	 0000000B _TEXT	Length= 0000001A Public
-  FAC  . . . . . . . . . . . . .	L Near	 00000012 _TEXT	
-  LEND . . . . . . . . . . . . .	L Near	 00000020 _TEXT	
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000024 Public
+myFac  . . . . . . . . . . . . .	P Near	 0000000B _TEXT	Length= 00000019 Public
+  FAC  . . . . . . . . . . . . .	L Near	 00000011 _TEXT	
+  LEND . . . . . . . . . . . . .	L Near	 0000001F _TEXT	
 
 
 Symbols:
@@ -116,4 +120,4 @@ r  . . . . . . . . . . . . . . .	DWord	 00000004 _DATA
 wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
 
 	   0 Warnings
-	   0 Errors
+	   1 Errors
